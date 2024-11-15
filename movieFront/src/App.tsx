@@ -1,13 +1,36 @@
-import RootRoute from './page/RootRoute';
-import GlobalStyle from './style/GlobalStyle';
+// import RootRoute from './page/RootRoute';
+// import GlobalStyle from './style/GlobalStyle';
 
-export function App() {
+// export function App() {
+//   return (
+//     <>
+//       <GlobalStyle />
+//       <RootRoute />
+//     </>
+//   );
+// }
+
+// export default App;
+
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { ThemeProvider } from '@mui/material';
+import { theme } from './style/Theme';
+
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+
+function Root() {
   return (
-    <>
-      <GlobalStyle />
-      <RootRoute />
-    </>
+    <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>
+    </BrowserRouter>
   );
 }
-
-export default App;
+root.render(<Root />);

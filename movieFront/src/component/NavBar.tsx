@@ -19,7 +19,7 @@ function ResponsiveAppBar() {
     setValue(newValue);
   };
 
-  function handleOpenUserMenu(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  function handleOpenUserMenu(): void {
     throw new Error('Function not implemented.');
   }
 

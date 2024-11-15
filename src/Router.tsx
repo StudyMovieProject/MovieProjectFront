@@ -1,15 +1,22 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import Home from "./pages/Home";
+import { createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
+import Member from './pages/Member/Member';
+import MemberConfirm from './pages/Member/MemberConfirm';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
+    path: '/',
+    element: <Home />,
     children: [
       {
-        path: "",
-        element: <Home />,
+        path: '/Member',
+        element: <Member />,
+        children: [
+          {
+            path: 'Confirm',
+            element: <MemberConfirm />,
+          },
+        ],
       },
     ],
   },

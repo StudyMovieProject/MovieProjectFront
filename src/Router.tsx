@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Member from "./pages/Member/Member";
 import MemberConfirm from "./pages/Member/MemberConfirm";
-import BoxOffice from "./pages/Movie/BoxOffice";
+import BoxOffice from "./pages/Movie/components/BoxOffice/BoxOffice";
 import Moive from "./pages/Movie/Moive";
 import App from "./App";
 

@@ -1,14 +1,24 @@
-import { theme } from '../Theme';
-import { ThemeProvider } from '@mui/material/styles';
-import { Global as EmotionGlobal } from '@emotion/react';
-import emotionNormalize from 'emotion-normalize';
+import { css, Global } from "@emotion/react";
+import Home from "./pages/Home";
+import emotionNormalize from "emotion-normalize";
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <EmotionGlobal styles={emotionNormalize} />
-    </ThemeProvider>
+    <>
+      <Global
+        styles={css`
+          ${emotionNormalize}
+          html,
+    body {
+            padding: 0;
+            margin: 0;
+            background: white;
+            min-height: 100%;
+            font-family: Helvetica, Arial, sans-serif;
+          }
+        `}
+      />
+      <Home />
+    </>
   );
 }
-
-// export default App;

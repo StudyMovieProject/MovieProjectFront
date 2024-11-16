@@ -19,9 +19,8 @@ export default function HeaderBar() {
     <Box sx={{ flexGrow: 1 }}>
       <NavAppBar position="static">
         <LoginBtn>로그인</LoginBtn>
-        <NavButton>멤버십안내</NavButton>
         <NavButton onClick={toJoin}>회원가입</NavButton>
-        <LoginBtn>비회원예매내역</LoginBtn>
+        <LoginBtn>비회원</LoginBtn>
       </NavAppBar>
     </Box>
   );

@@ -34,7 +34,9 @@ export default function LoginBtn({ children, onClick }: LoginBtnProps) {
       <Btn
         onClick={() => {
           toggleModal();
-          onClick && onClick();
+          if (onClick) {
+            onClick();
+          }
         }}
       >
         {children}

@@ -1,18 +1,18 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
+import * as React from "react";
+import styled from "@emotion/styled";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container";
 //import Button from '@mui/material/Button';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { useNavigate } from 'react-router-dom';
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { useNavigate } from "react-router-dom";
 
 function ResponsiveAppBar() {
-  const [value, setValue] = React.useState<string>('');
+  const [value, setValue] = React.useState<string>("");
 
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -25,49 +25,57 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ display: 'flex', alignItem: 'center', backgroundColor: '#fff' }}>
+    <AppBar
+      position="static"
+      sx={{ display: "flex", alignItem: "center", backgroundColor: "#fff" }}
+    >
       <Container
         // maxWidth="xl"
         sx={{
-          backgroundColor: '#fff',
-          borderBottom: '1px solid black',
-          height: '6.25rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          margin: '0',
+          backgroundColor: "#fff",
+          borderBottom: "1px solid black",
+          height: "6.25rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          margin: "0",
         }}
       >
         <Toolbar disableGutters>
           <Box
-          onClick={toMain}
+            onClick={toMain}
             component="img"
             src="/../public/mainLogo.png"
             alt="씨네큐 로고 및 메인 페이지로 이동"
             sx={{
-              height: '4rem',
-              width: '10rem',
+              height: "4rem",
+              width: "10rem",
             }}
           />
           {/* 탭 메뉴 */}
           <Box
             sx={{
-              width: '50%',
-              typography: 'body1',
+              width: "50%",
+              typography: "body1",
               borderBottom: 1,
               // borderColor: '#C39C71',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
             }}
           >
             <TabContext value={value}>
               <Box>
-                <TabList onChange={handleChange} aria-label="navigation tabs" centered>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="navigation tabs"
+                  centered
+                >
                   <Tab
                     component="a" // 추후 {Movie/BoxOffice}
                     label="영화"
                     value="1"
+                    onClick={() => navigate("movie/box-office")}
                   />
                   <Tab
                     component="a" // 추후 {heater/Movie?TheaterCode=1001}
@@ -86,9 +94,14 @@ function ResponsiveAppBar() {
                   />
                 </TabList>
               </Box>
-              <Box sx={{ display: 'flex' }}>
+              <Box sx={{ display: "flex" }}>
                 {/* 영화 탭 내용들 */}
-                <NavTabPanel value="1">박스 오피스</NavTabPanel>
+                <NavTabPanel
+                  value="1"
+                  onClick={() => navigate("movie/box-office")}
+                >
+                  박스 오피스
+                </NavTabPanel>
                 <NavTabPanel value="1">최신 개봉작</NavTabPanel>
                 <NavTabPanel value="1">상영 예정작</NavTabPanel>
                 {/* 영화관 탭 내용들 */}

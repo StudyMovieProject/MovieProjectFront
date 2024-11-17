@@ -11,9 +11,14 @@ export const getMovieHandler = http.get(
     const { status } = params;
     console.log("status", status);
 
-    if (status === "LATEST") {
-      return HttpResponse.json({ movies }, { status: 200 });
-    }
+    return HttpResponse.json(
+      {
+        code: 1,
+        msg: "요청에 성공했습니다.",
+        data: movies,
+      },
+      { status: 200 }
+    );
   }
 );
 

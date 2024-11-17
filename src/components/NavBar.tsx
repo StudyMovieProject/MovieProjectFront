@@ -96,7 +96,12 @@ function ResponsiveAppBar() {
                 </Box>
                 <Box sx={{ display: "flex" }}>
                   {/* 영화 탭 내용들 */}
-                  <NavTabPanel value="1">박스 오피스</NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate("/movie/box-office")}
+                  >
+                    박스 오피스
+                  </NavTabPanel>
                   <NavTabPanel value="1">최신 개봉작</NavTabPanel>
                   <NavTabPanel value="1">상영 예정작</NavTabPanel>
                   {/* 영화관 탭 내용들 */}

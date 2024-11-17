@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Member from "./pages/Member/Member";
 import MemberConfirm from "./pages/Member/MemberConfirm";
-import BoxOffice from "./pages/Movie/BoxOffice";
 import Moive from "./pages/Movie/Moive";
-import App from "./App";
+import { App } from "./App";
+import BoxOffice from "./pages/Movie/components/BoxOffice/BoxOffice";
 
 export const router = createBrowserRouter([
   {
@@ -17,11 +17,11 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/Member",
-            element: <Member />, 
+            element: <Member />,
             children: [
               {
                 path: "Confirm",
-                element: <MemberConfirm />, 
+                element: <MemberConfirm />,
               },
             ],
           },

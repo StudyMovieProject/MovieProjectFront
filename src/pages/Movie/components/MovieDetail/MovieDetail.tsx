@@ -1,12 +1,13 @@
 import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
-import { ApiResponse, IMovieDetail } from "../../types";
 import { getMovieDetail } from "../../../../api/movieApi";
 import MovieDetailPoster from "./components/MovieDetailPoster";
 import MovieSummary from "./components/MovieSummary";
 import MovieDetailPlot from "./components/MovieDetailPlot";
 import MovieDetailSkeleton from "./components/MovieDetailSkeleton";
+import { IMovieDetail } from "../../../../typese/movieTypes";
+import { ApiResponse } from "../../../../typese/types";
 
 function MovieDetail() {
   const [searchParams] = useSearchParams();

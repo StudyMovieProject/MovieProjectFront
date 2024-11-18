@@ -1,9 +1,10 @@
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { getMovieList } from "../../../../api/movieApi";
-import { ApiResponse, IMovieList } from "../../types";
-import MovieCardSkeleton from "../../../../components/MovieCard/MovieCardSkeleton";
-import MovieCard from "../../../../components/MovieCard/MovieCard";
+import { getMovieList } from "../../../api/movieApi";
+import MovieCardSkeleton from "../../../components/MovieCard/MovieCardSkeleton";
+import MovieCard from "../../../components/MovieCard/MovieCard";
+import { ApiResponse } from "../../../typese/types";
+import { IMovieList } from "../../../typese/movieTypes";
 
 function BoxOffice() {
   const { isLoading: moviesLoading, data: moviesData } = useQuery<
@@ -11,6 +12,7 @@ function BoxOffice() {
   >({
     queryKey: ["movieList"],
     queryFn: () => getMovieList("LATEST"),
+    gcTime: Infinity,
   });
 
   return (
@@ -22,10 +24,11 @@ function BoxOffice() {
       }}
     >
       {moviesLoading
-        ? [...Array.from(Array(100).keys())].map((item) => (
+        ? [...Array.from(Array(12).keys())].map((item) => (
             <MovieCardSkeleton key={item} />
           ))
-        : moviesData?.data?.map((movie) => (
+        : Array.isArray(moviesData?.data) && //.map is not a function 에러 해결
+          moviesData?.data.map((movie) => (
             <MovieCard
               key={movie.id}
               id={movie.id}

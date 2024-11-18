@@ -12,9 +12,9 @@ export default function HeaderBar() {
   //   navigate(`Member/MembershipIntro`);
   // };
   const toJoin = () => {
-    navigate(`/Member`);
+    navigate(`/member`);
   };
-
+  // 일괄적으로 소문자로 만들고 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavAppBar position="static">

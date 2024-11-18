@@ -39,7 +39,7 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <AppBar position="static" elevation={0} sx={{ display: 'flex', alignItems: 'center' }}>
+      <AppBar position="static" elevation={0} sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F3EEEA', }}>
         <Container
           // maxWidth="xl"
           sx={{

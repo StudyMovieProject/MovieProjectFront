@@ -8,6 +8,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Typography from '@mui/material/Typography';
 
+import axios from 'axios';
+import { useState } from 'react';
+
 const ConfirmContainer = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -44,7 +47,54 @@ export const MemberConfirm = () => {
   const navigate = useNavigate();
 
   const toSignupComplete = () => {
-    navigate('/Member/complete');
+    navigate('/member/complete');
+  };
+
+  const [formData, setFormData] = useState({
+    memberId: "",
+    username: "",
+    email: "",
+    tel: "",
+    zipcode: "",
+    address: "",
+    detailAddress: "",
+    fullname: "",
+    role: "",
+    status: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      setFormData((prev) => ({
+        ...prev,
+        // agreements: {
+        //   ...prev.agreements,
+        //   [name]: checked,
+        // },
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // 비밀번호 확인
+    // if (formData.password !== formData.confirmPassword) {
+    //   alert("비밀번호가 일치하지 않습니다.");
+    //   return;
+    // }
+    try {
+      const response = await axios.post('/users', formData);
+      console.log('회원가입 성공:', response.data);
+      navigate('/Member/complete');
+    } catch (error) {
+      console.error('회원가입 실패:', error);
+    }
   };
 
   return (
@@ -53,13 +103,15 @@ export const MemberConfirm = () => {
         <Typography variant="h4" gutterBottom>
           회원가입 확인
         </Typography>
-        <FormBox noValidate autoComplete="off">
+        <FormBox noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Field>
             <TextField
               label="아이디"
               variant="outlined"
               fullWidth
               required
+              value={formData.username}
+              onChange={handleChange}
             />
           </Field>
           <Field>
@@ -69,6 +121,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              value={formData.email}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -79,6 +133,8 @@ export const MemberConfirm = () => {
               helperText="영문, 숫자, 특수문자 2개 조합 8자 이상"
               fullWidth
               required
+              // value={formData.password}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -88,6 +144,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              //value={formData.password}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -96,18 +154,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
-            />
-          </Field>
-          <Field>
-            <TextField
-              label="생년월일"
-              type="date"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              fullWidth
-              required
+              value={formData.username}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -116,6 +164,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              value={formData.tel}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -124,6 +174,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              value={formData.address}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -132,6 +184,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              value={formData.detailAddress}
+              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -140,6 +194,8 @@ export const MemberConfirm = () => {
               variant="outlined"
               fullWidth
               required
+              value={formData.zipcode}
+              onAbort={handleChange}
             />
           </Field>
 
@@ -196,3 +252,10 @@ export const MemberConfirm = () => {
 };
 
 export default MemberConfirm;
+
+// TODO
+// [ ] 전체 동의 버튼 누르면 일괄 동의 되도록 처리
+// [ ] validation
+// [ ] 폼 옆에 각각 폼 이름 작성
+// [ ] outlet 해결 
+// [ ] 다음 페이지에 role, status 데이터 

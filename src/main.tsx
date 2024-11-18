@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+// import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ async function enableMocking() {
 
   const { worker } = await import("./mocks/browser.ts");
 
-  // 서비스 워커 시작
+  //서비스 워커 시작
   return worker.start();
 }
 

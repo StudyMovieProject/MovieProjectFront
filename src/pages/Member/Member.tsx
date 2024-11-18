@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 //import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 // import { Theme } from '@mui/material';
@@ -48,11 +48,13 @@ const FormBox = styled(Box)`
 export const Member = () => {
   const navigate = useNavigate();
   const toMemberConfirm = () => {
-    navigate(`/Member/Confirm`);
+    navigate(`/member/Confirm`);
   };
 
   return (
+
     <CenteredContainer>
+      <Outlet />
       {/* 단계 표시 */}
       <StepsBox>
         <p>이메일 입력(소셜가입)</p>

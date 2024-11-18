@@ -7,10 +7,12 @@ import {
   CardMedia,
 } from "@mui/material";
 import { IMovieDetail } from "../../pages/Movie/types";
+import { useNavigate } from "react-router-dom";
 
 type MovieCardProps = Pick<IMovieDetail, "id" | "posterImage" | "title">;
 
 function MovieCard({ id, posterImage, title }: MovieCardProps) {
+  const navigate = useNavigate();
   return (
     <Card
       key={id}
@@ -68,6 +70,7 @@ function MovieCard({ id, posterImage, title }: MovieCardProps) {
               예매하기
             </Button>
             <Button
+              onClick={() => navigate(`/movie/info?MovieCode=${id}`)}
               sx={{
                 color: "white",
                 width: "100%",

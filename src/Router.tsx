@@ -5,6 +5,7 @@ import MemberConfirm from "./pages/Member/MemberConfirm";
 import Moive from "./pages/Movie/Moive";
 import { App } from "./App";
 import BoxOffice from "./pages/Movie/components/BoxOffice/BoxOffice";
+import MovieDetail from "./pages/Movie/components/MovieDetail/MovieDetail";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
           {
             path: "box-office",
             element: <BoxOffice />,
+          },
+          {
+            path: "Info",
+            element: <MovieDetail />,
           },
         ],
       },

@@ -11,22 +11,27 @@ export const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "",
-        element: <Home />,
-        children: [
-          {
-            path: "member",
-            element: <Member />,
-            children: [
-              {
-                path: "confirm",
-                element: <MemberConfirm />,
-              },
-            ],
-          },
-        ],
-      },
+      { path: "/", element: <Home /> },
+      { path: "/member", element: <Member /> },
+      { path: "/member/confirm", element: <MemberConfirm /> },
+
+      // children: [
+      //   {
+      //     path: "",
+      //     element: <Home />,
+      //     children: [
+      //       {
+      //         path: "member",
+      //         element: <Member />,
+      //         children: [
+      //           {
+      //             path: "confirm",
+      //             element: <MemberConfirm />,
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
       // {
       //   path: "movie",
       //   element: <Moive />,

@@ -1,7 +1,6 @@
 import { css, Global } from "@emotion/react";
-import Home from "./pages/Home";
 import emotionNormalize from "emotion-normalize";
-//import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 export function App() {
   return (
@@ -16,10 +15,11 @@ export function App() {
             background: white;
             min-height: 100%;
             font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
           }
         `}
       />
-      <Home />
+      <Outlet />
     </>
   );
 }

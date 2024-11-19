@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+//import { Outlet } from 'react-router-dom';
 //import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 // import { Theme } from '@mui/material';
@@ -15,7 +16,6 @@ const CenteredContainer = styled(Box)`
   height: 100vh;
 `;
 
-// 상단의 단계를 표시하는 박스
 const StepsBox = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,6 @@ const StepsBox = styled(Box)`
   margin-bottom: 20px;
 `;
 
-// 폼 요소를 감싸는 박스
 const FormBox = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -48,13 +47,13 @@ const FormBox = styled(Box)`
 export const Member = () => {
   const navigate = useNavigate();
   const toMemberConfirm = () => {
-    navigate(`/member/Confirm`);
+    navigate(`/member/confirm`);
   };
 
   return (
 
     <CenteredContainer>
-      <Outlet />
+      {/* <Outlet /> */}
       {/* 단계 표시 */}
       <StepsBox>
         <p>이메일 입력(소셜가입)</p>

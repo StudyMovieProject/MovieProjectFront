@@ -8,13 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 export default function HeaderBar() {
   const navigate = useNavigate();
-  // const toMembersInfo = () => {
-  //   navigate(`Member/MembershipIntro`);
-  // };
+
   const toJoin = () => {
     navigate(`/member`);
   };
-  // 일괄적으로 소문자로 만들고 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavAppBar position="static">

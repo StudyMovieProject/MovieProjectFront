@@ -1,6 +1,7 @@
 import { css, Global } from "@emotion/react";
 import Home from "./pages/Home";
 import emotionNormalize from "emotion-normalize";
+//import { Outlet } from 'react-router-dom';
 
 export function App() {
   return (

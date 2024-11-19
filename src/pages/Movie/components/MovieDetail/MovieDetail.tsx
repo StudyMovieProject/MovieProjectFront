@@ -17,6 +17,7 @@ function MovieDetail() {
   >({
     queryKey: ["movieList"],
     queryFn: () => getMovieDetail(Number(movieId)),
+    gcTime: 0,
   });
 
   return (

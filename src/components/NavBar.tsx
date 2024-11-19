@@ -102,8 +102,18 @@ function ResponsiveAppBar() {
                   >
                     박스 오피스
                   </NavTabPanel>
-                  <NavTabPanel value="1">최신 개봉작</NavTabPanel>
-                  <NavTabPanel value="1">상영 예정작</NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate("/movie/latest")}
+                  >
+                    최신 개봉작
+                  </NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate("/movie/comming")}
+                  >
+                    상영 예정작
+                  </NavTabPanel>
                   {/* 영화관 탭 내용들 */}
                   <NavTabPanel value="2">서울/경기/인천</NavTabPanel>
                   <NavTabPanel value="2">충청</NavTabPanel>

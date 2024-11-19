@@ -4,8 +4,10 @@ import Member from "./pages/Member/Member";
 import MemberConfirm from "./pages/Member/MemberConfirm";
 import Moive from "./pages/Movie/Moive";
 import { App } from "./App";
-import BoxOffice from "./pages/Movie/components/BoxOffice/BoxOffice";
+import BoxOffice from "./pages/Movie/components/BoxOffice";
 import MovieDetail from "./pages/Movie/components/MovieDetail/MovieDetail";
+import MovieLatest from "./pages/Movie/components/MovieLatest";
+import MovieComming from "./pages/Movie/components/MovieComming";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ export const router = createBrowserRouter([
           {
             path: "Info",
             element: <MovieDetail />,
+          },
+          {
+            path: "latest",
+            element: <MovieLatest />,
+          },
+          {
+            path: "comming",
+            element: <MovieComming />,
           },
         ],
       },

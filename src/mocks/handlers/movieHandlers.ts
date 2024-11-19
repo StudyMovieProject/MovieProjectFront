@@ -11,14 +11,47 @@ export const getMovieListHandler = http.get(
   ({ params }) => {
     const { status } = params;
 
-    return HttpResponse.json(
-      {
-        code: 1,
-        msg: "요청에 성공했습니다.",
-        data: movies,
-      },
-      { status: 200 }
-    );
+    if (!status) {
+      return HttpResponse.json(
+        {
+          code: -1,
+          msg: "요청에 실패했습니다.",
+          data: movies,
+        },
+        { status: 404 }
+      );
+    }
+
+    if (status === "POPULAR") {
+      return HttpResponse.json(
+        {
+          code: 1,
+          msg: "POPULAR 요청에 성공했습니다.",
+          data: movies,
+        },
+        { status: 200 }
+      );
+    }
+    if (status === "LATEST") {
+      return HttpResponse.json(
+        {
+          code: 1,
+          msg: "LATEST 요청에 성공했습니다.",
+          data: movies,
+        },
+        { status: 200 }
+      );
+    }
+    if (status === "UPCOMING") {
+      return HttpResponse.json(
+        {
+          code: 1,
+          msg: "UPCOMING 요청에 성공했습니다.",
+          data: movies,
+        },
+        { status: 200 }
+      );
+    }
   }
 );
 

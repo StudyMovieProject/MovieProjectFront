@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Outlet } from 'react-router-dom';
+//import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 
 const CenteredContainer = styled(Box)`
@@ -29,7 +29,7 @@ const FormBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   //width: 10rem;
-  //width: 100%;
+  width: 100%;
 `;
 
 const StyledCard = styled(Card)`
@@ -39,6 +39,14 @@ const StyledCard = styled(Card)`
   border-radius: 1rem;
   background-color: #ffffff;
 `;
+
+// 입력 필드 스타일링
+// const StyledInput = styled.input`
+//   width: 100%;
+//   padding: 8px;
+//   margin: 8px 0;
+//   box-sizing: border-box;
+// `;
 
 const StyledLabel = styled.label`
   align-self: flex-start;
@@ -55,12 +63,11 @@ export default function Member() {
 
   return (
     <>
-      <Outlet />
       <CenteredContainer>
         <StyledCard>
           <CardContent>
             <Typography variant="h4" component="div" gutterBottom sx={{ fontSize: '2rem', fontWeigt: 'bold', paddingBottom: '0.5rem' }}>
-              회원가입
+              로그인
             </Typography>
             <FormBox>
               <StyledLabel htmlFor="email">소셜 계정으로 가입</StyledLabel>
@@ -88,6 +95,16 @@ export default function Member() {
                 error
                 id="emalil"
                 label="Email"
+                variant="standard"
+                fullWidth
+                required
+                margin="normal"
+                sx={{ color: 'black' }}
+              />
+              <TextField
+                error
+                id="assword"
+                label="Password"
                 variant="standard"
                 fullWidth
                 required

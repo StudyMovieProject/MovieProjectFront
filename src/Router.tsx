@@ -8,15 +8,15 @@ import BoxOffice from "./pages/Movie/components/BoxOffice";
 import MovieDetail from "./pages/Movie/components/MovieDetail/MovieDetail";
 import MovieLatest from "./pages/Movie/components/MovieLatest";
 import MovieComming from "./pages/Movie/components/MovieComming";
+import MembershipIntro from "./pages/Member/MembershipIntro";
+import App from "./App";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
     children: [
       {
-        path: "",
-        element: <Home />,
+        element: <App />,
         children: [
           {
             path: "/Member",
@@ -52,6 +52,12 @@ export const router = createBrowserRouter([
           },
         ],
       },
+          { path: "/", element: <Home /> },
+          { path: "/member", element: <Member /> },
+          { path: "/member/confirm", element: <MemberConfirm /> },
+          { path: "/member/membershipIntro", element: <MembershipIntro /> },
+        ],
+      }
     ],
   },
 ]);

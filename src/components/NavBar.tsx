@@ -16,6 +16,21 @@ const Tabs = styled(Tab) <TabProps>`
   border: black;
   outline-color: black;
   text-decoration: black;
+
+  &.Mui-selected {
+    color: black;
+  }
+
+`;
+
+const NavTabPanel = styled(TabPanel)`
+  padding: 0;
+  font-size: 0.8rem;
+  color: #888889;
+
+  &:not(:last-of-type) {
+    padding-left: 1rem;
+  }
 `;
 
 function ResponsiveAppBar() {
@@ -39,7 +54,7 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <AppBar position="static" elevation={0} sx={{ display: 'flex', alignItems: 'center' }}>
+      <AppBar position="static" elevation={0} sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F3EEEA', }}>
         <Container
           // maxWidth="xl"
           sx={{
@@ -56,7 +71,6 @@ function ResponsiveAppBar() {
                 width: '50%',
                 typography: 'body1',
                 borderBottom: 1,
-                // borderColor: '#C39C71',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
@@ -64,25 +78,25 @@ function ResponsiveAppBar() {
             >
               <TabContext value={value || ''}>
                 <Box>
-                  <TabList onChange={handleChange} aria-label="navigation tabs" centered>
+                  <TabList sx={{
+                    '& .MuiTabs-indicator': {
+                      backgroundColor: '#776B5D',
+                    },
+                  }} onChange={handleChange} aria-label="navigation tabs" centered>
                     <Tabs
                       component="a" // 추후 {Movie/BoxOffice}
                       label="영화"
-                      //value="1"
-                      value={value || false}
+                      value="1"
                     />
-
                     <Tabs
                       component="a" // 추후 {heater/Movie?TheaterCode=1001}
                       label="극장"
-                      //value="2"
-                      value={value || false}
+                      value="2"
                     />
                     <Tabs
                       component="a" // 추후 {Event/List}
                       label="예매"
-                      //value="3"
-                      value={value || false}
+                      value="3"
                     />
                   </TabList>
                 </Box>
@@ -121,24 +135,26 @@ function ResponsiveAppBar() {
             >
               <TabContext value={value || ''}>
                 <Box>
-                  <TabList onChange={handleChange} aria-label="navigation tabs" centered>
+                  <TabList sx={{
+                    '& .MuiTabs-indicator': {
+                      backgroundColor: '#776B5D',
+                    },
+                  }}
+                    onChange={handleChange} aria-label="navigation tabs" centered>
                     <Tabs
                       component="a" // 추후 {Movie/BoxOffice}
                       label="스토어"
-                      //value="4"
-                      value={value || false}
+                      value="4"
                     />
                     <Tabs
                       component="a" // 추후 {heater/Movie?TheaterCode=1001}
                       label="고객센터"
-                      //value="5"
-                      value={value || false}
+                      value="5"
                     />
                     <Tabs
                       component="a" // 추후 {Event/List}
                       label="혜택"
-                      //value="6"
-                      value={value || false}
+                      value="6"
                     />
                   </TabList>
                 </Box>
@@ -158,12 +174,3 @@ function ResponsiveAppBar() {
 }
 export default ResponsiveAppBar;
 
-const NavTabPanel = styled(TabPanel)`
-  padding: 0;
-  font-size: 0.8rem;
-  color: #888889;
-
-  &:not(:last-of-type) {
-    padding-left: 1rem;
-  }
-`;

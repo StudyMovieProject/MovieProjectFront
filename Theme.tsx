@@ -14,15 +14,19 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: '#888889',
+          color: 'black',
           lineHeight: 0,
+          '&.Mui-selected': {
+            color: 'black',
+          },
         },
+
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#F3EEEA',
+          // backgroundColor: '#F3EEEA',
           boxShadow: 'none',
         },
       },
@@ -44,9 +48,11 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: 'black',
-
           '&.Mui-selected': {
             color: '#776B5D',
+          },
+          indicator: {
+            backgroundColor: '#776B5D',
           },
         },
       },
@@ -55,8 +61,11 @@ export const theme = createTheme({
       styleOverrides: {
         indicator: {
           backgroundColor: '#776B5D',
+
+
         },
       },
     },
   },
 });
+

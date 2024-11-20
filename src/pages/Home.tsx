@@ -7,7 +7,6 @@ export default function Home() {
     <>
       <Header />
       <NavBar />
-      <p>메인페이지</p>
       <Outlet />
     </>
   );

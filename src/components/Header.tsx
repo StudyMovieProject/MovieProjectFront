@@ -8,11 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function HeaderBar() {
   const navigate = useNavigate();
-  // const toMembersInfo = () => {
-  //   navigate(`Member/MembershipIntro`);
-  // };
+
   const toJoin = () => {
-    navigate(`/Member`);
+    navigate(`/member`);
   };
 
   return (

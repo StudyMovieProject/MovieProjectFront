@@ -1,24 +1,26 @@
 // /** @jsxImportSource @emotion/react */
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
-import LoginBtn from './LoginBtn';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 export default function HeaderBar() {
   const navigate = useNavigate();
 
-  const toJoin = () => {
-    navigate(`/member`);
+  const toMember = () => {
+    navigate(`/member`); // 회원가입
+  };
+  const toLogin = () => {
+    navigate(`/member/membershipIntro`); // 로그인 
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavAppBar position="static">
-        <LoginBtn>로그인</LoginBtn>
-        <NavButton onClick={toJoin}>회원가입</NavButton>
-        <LoginBtn>비회원</LoginBtn>
+        <HeaderBtn onClick={toLogin}>로그인</HeaderBtn>
+        <HeaderBtn onClick={toMember}>회원가입</HeaderBtn>
+        <HeaderBtn onClick={toLogin}>비회원</HeaderBtn>
       </NavAppBar>
     </Box>
   );
@@ -34,9 +36,10 @@ const NavAppBar = styled(AppBar)`
   padding-right: 1.5rem;
 `;
 
-const NavButton = styled(Button)`
-  position: static;
-  margin: 0;
-  padding: 0 0.5rem 0 0;
-  font-size: 0.8rem;
+export const HeaderBtn = styled(Button)`
+  color: black;
+  border: none;
+  font-size: 1rem;
+  /* &:hover {
+  } */
 `;

@@ -1,25 +1,18 @@
-import { css, Global } from "@emotion/react";
-import emotionNormalize from "emotion-normalize";
+import { Global, ThemeProvider } from "@emotion/react";
 import { Outlet } from 'react-router-dom';
+import { theme, globalStyles } from '../Theme';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
 
 export function App() {
   return (
     <>
-      <Global
-        styles={css`
-          ${emotionNormalize}
-          html,
-    body {
-            padding: 0;
-            margin: 0;
-            background: white;
-            min-height: 100%;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 16px;
-          }
-        `}
-      />
-      <Outlet />
+      <ThemeProvider theme={theme}>
+        <Global styles={globalStyles} />
+        <Header />
+        <NavBar />
+        <Outlet />
+      </ThemeProvider>
     </>
   );
 }

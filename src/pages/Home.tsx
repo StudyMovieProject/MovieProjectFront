@@ -1,13 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Header';
-import NavBar from '../components/NavBar';
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <NavBar />
       <Outlet />
+      <p>메인 페이지입니다</p>
+      {/* TODO
+    // [ ] 캐러셀 + 추후 영화 이미지 api */}
     </>
   );
 }

@@ -20,7 +20,6 @@ const Tabs = styled(Tab) <TabProps>`
   &.Mui-selected {
     color: black;
   }
-
 `;
 
 const NavTabPanel = styled(TabPanel)`
@@ -63,6 +62,7 @@ function ResponsiveAppBar() {
             alignItems: 'center',
             justifyContent: 'space-evenly',
             margin: '0',
+            color: '#F3EEEA'
           }}
         >
           <Toolbar disableGutters>
@@ -163,7 +163,6 @@ function ResponsiveAppBar() {
                   <NavTabPanel value="5">문의 게시판</NavTabPanel>
                   <NavTabPanel value="6">카드</NavTabPanel>
                 </Box>
-
               </TabContext>
             </Box>
           </Toolbar>

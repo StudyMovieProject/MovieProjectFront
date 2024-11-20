@@ -1,5 +1,22 @@
 import { createTheme } from '@mui/material/styles';
+import { css } from '@emotion/react';
+import emotionNormalize from "emotion-normalize";
 
+export const globalStyles = css`
+  ${emotionNormalize}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    background-color: white;
+    min-height: 100%;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+`;
 export const theme = createTheme({
   palette: {
     mode: 'light',
@@ -9,6 +26,9 @@ export const theme = createTheme({
     // secondary: {
     //   main: '#..',
     // },
+  },
+  typography: {
+    fontFamily: `"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI"`,
   },
   components: {
     MuiButton: {
@@ -61,11 +81,8 @@ export const theme = createTheme({
       styleOverrides: {
         indicator: {
           backgroundColor: '#776B5D',
-
-
         },
       },
     },
   },
 });
-

@@ -87,16 +87,19 @@ function ResponsiveAppBar() {
                       component="a" // 추후 {Movie/BoxOffice}
                       label="영화"
                       value="1"
+                      onClick={() => navigate("/movie/box-office")}
                     />
                     <Tabs
                       component="a" // 추후 {heater/Movie?TheaterCode=1001}
                       label="극장"
                       value="2"
+                      onClick={() => navigate("/movie/latest")}
                     />
                     <Tabs
                       component="a" // 추후 {Event/List}
                       label="예매"
                       value="3"
+                      onClick={() => navigate("/movie/comming")}
                     />
                   </TabList>
                 </Box>

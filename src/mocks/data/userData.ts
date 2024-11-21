@@ -1,8 +1,3 @@
-// export interface User {
-//   memberId: string;
-// ...
-// }
-
 export const users = [
   {
     memberId: "user001",
@@ -147,6 +142,5 @@ export const users = [
     fullname: "Jack Song",
     role: "CUSTOMER",
     status: "ACTIVE",
-
   },
 ];

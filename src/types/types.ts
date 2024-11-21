@@ -1,9 +1,7 @@
-// import { iMemberE }
+export interface ApiResponse<T> {
+  code: number;
+  msg: string;
+  data: T;
+}
 
-// export interface ApiResponse<T> {
-//   code: number;
-//   msg: string;
-//   data: T;
-// }
-
-// type MemberListResponse = ApiResponse<IMemberList>
+// type MovieListResponse = ApiResponse<IMovieList>

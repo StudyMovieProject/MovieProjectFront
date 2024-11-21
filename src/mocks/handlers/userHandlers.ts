@@ -22,14 +22,13 @@ export const getUserHandler = http.get(
     return Response.json(
       {
         code: 1,
-        msg: '요청에 성공했습니다.',
+        msg: "요청에 성공했습니다.",
         data: users,
       },
       { status: 200 }
-    )
+    );
   }
-)
-
+);
 
 //모킹 핸들러 사용 예시
 // export const getMovieHandler = http.get(
@@ -49,3 +48,4 @@ export const getUserHandler = http.get(
 //     );
 //   }
 // );
+export const userHandlers = [getUserHandler];

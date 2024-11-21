@@ -1,16 +1,16 @@
 import { Global, ThemeProvider } from "@emotion/react";
-import { Outlet } from 'react-router-dom';
-import { theme, globalStyles } from '../Theme';
-import Header from './components/Header';
-import NavBar from './components/NavBar';
+import { theme, globalStyles } from "../Theme";
+import { Outlet } from "react-router-dom";
+import HeaderBar from "./components/Header";
+import ResponsiveAppBar from "./components/NavBar";
 
 export function App() {
   return (
     <>
+      <Global styles={globalStyles} />
       <ThemeProvider theme={theme}>
-        <Global styles={globalStyles} />
-        <Header />
-        <NavBar />
+        <HeaderBar />
+        <ResponsiveAppBar />
         <Outlet />
       </ThemeProvider>
     </>

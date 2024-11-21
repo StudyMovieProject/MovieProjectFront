@@ -15,7 +15,7 @@ function MovieDetail() {
   const { isLoading: movieLoading, data: movieData } = useQuery<
     ApiResponse<IMovieDetail>
   >({
-    queryKey: ["movieList"],
+    queryKey: ["movieDetail"],
     queryFn: () => getMovieDetail(Number(movieId)),
     gcTime: 0,
   });

@@ -1,9 +1,9 @@
 // /** @jsxImportSource @emotion/react */
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export default function HeaderBar() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function HeaderBar() {
     navigate(`/member`); // 회원가입
   };
   const toLogin = () => {
-    navigate(`/member/membershipIntro`); // 로그인 
+    navigate(`/member/membershipIntro`); // 로그인
   };
 
   return (

@@ -11,7 +11,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useNavigate } from 'react-router-dom';
 
-const Tabs = styled(Tab) <TabProps>`
+const Tabs = styled(Tab)<TabProps>`
   color: black;
   border: black;
   outline-color: black;
@@ -33,7 +33,6 @@ const NavTabPanel = styled(TabPanel)`
 `;
 
 function ResponsiveAppBar() {
-
   //const [value, setValue] = React.useState<string | undefined>(undefined);
   const [value, setValue] = React.useState<string>('1');
   // const [tabValues, setTabValues] = React.useState<{ left: string; right: string }>({
@@ -53,7 +52,15 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <AppBar position="static" elevation={0} sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F3EEEA', }}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#F3EEEA',
+        }}
+      >
         <Container
           // maxWidth="xl"
           sx={{
@@ -62,7 +69,7 @@ function ResponsiveAppBar() {
             alignItems: 'center',
             justifyContent: 'space-evenly',
             margin: '0',
-            color: '#F3EEEA'
+            color: '#F3EEEA',
           }}
         >
           <Toolbar disableGutters>
@@ -78,36 +85,54 @@ function ResponsiveAppBar() {
             >
               <TabContext value={value || ''}>
                 <Box>
-                  <TabList sx={{
-                    '& .MuiTabs-indicator': {
-                      backgroundColor: '#776B5D',
-                    },
-                  }} onChange={handleChange} aria-label="navigation tabs" centered>
+                  <TabList
+                    sx={{
+                      '& .MuiTabs-indicator': {
+                        backgroundColor: '#776B5D',
+                      },
+                    }}
+                    onChange={handleChange}
+                    aria-label="navigation tabs"
+                    centered
+                  >
                     <Tabs
                       component="a" // 추후 {Movie/BoxOffice}
                       label="영화"
                       value="1"
-                      onClick={() => navigate("/movie/box-office")}
+                      onClick={() => navigate('/movie/box-office')}
                     />
                     <Tabs
                       component="a" // 추후 {heater/Movie?TheaterCode=1001}
                       label="극장"
                       value="2"
-                      onClick={() => navigate("/movie/latest")}
                     />
                     <Tabs
                       component="a" // 추후 {Event/List}
                       label="예매"
                       value="3"
-                      onClick={() => navigate("/movie/comming")}
                     />
                   </TabList>
                 </Box>
                 <Box sx={{ display: 'flex' }}>
                   {/* 영화 탭 내용들 */}
-                  <NavTabPanel value="1">박스 오피스</NavTabPanel>
-                  <NavTabPanel value="1">최신 개봉작</NavTabPanel>
-                  <NavTabPanel value="1">상영 예정작</NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate('/movie/box-office')}
+                  >
+                    박스 오피스
+                  </NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate('/movie/latest')}
+                  >
+                    최신 개봉작
+                  </NavTabPanel>
+                  <NavTabPanel
+                    value="1"
+                    onClick={() => navigate('/movie/comming')}
+                  >
+                    상영 예정작
+                  </NavTabPanel>
                   {/* 영화관 탭 내용들 */}
                   <NavTabPanel value="2">서울/경기/인천</NavTabPanel>
                   <NavTabPanel value="2">충청</NavTabPanel>
@@ -138,12 +163,16 @@ function ResponsiveAppBar() {
             >
               <TabContext value={value || ''}>
                 <Box>
-                  <TabList sx={{
-                    '& .MuiTabs-indicator': {
-                      backgroundColor: '#776B5D',
-                    },
-                  }}
-                    onChange={handleChange} aria-label="navigation tabs" centered>
+                  <TabList
+                    sx={{
+                      '& .MuiTabs-indicator': {
+                        backgroundColor: '#776B5D',
+                      },
+                    }}
+                    onChange={handleChange}
+                    aria-label="navigation tabs"
+                    centered
+                  >
                     <Tabs
                       component="a" // 추후 {Movie/BoxOffice}
                       label="스토어"
@@ -175,4 +204,3 @@ function ResponsiveAppBar() {
   );
 }
 export default ResponsiveAppBar;
-

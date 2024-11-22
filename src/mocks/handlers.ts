@@ -1,4 +1,4 @@
-import { getUserHandler } from "./handlers/userHandlers";
-// import { movieHandlers } from "./handlers/movieHandlers";
+import { movieHandlers } from "./handlers/movieHandlers";
+import { userHandlers } from "./handlers/userHandlers";
 
-export const handlers = [getUserHandler];
+export const handlers = [...movieHandlers, ...userHandlers];

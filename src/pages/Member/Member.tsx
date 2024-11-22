@@ -1,12 +1,12 @@
-import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import styled from '@emotion/styled';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { Outlet } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import styled from "@emotion/styled";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Outlet } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 const CenteredContainer = styled(Box)`
   display: flex;
@@ -59,7 +59,16 @@ export default function Member() {
       <CenteredContainer>
         <StyledCard>
           <CardContent>
-            <Typography variant="h4" component="div" gutterBottom sx={{ fontSize: '2rem', fontWeigt: 'bold', paddingBottom: '0.5rem' }}>
+            <Typography
+              variant="h4"
+              component="div"
+              gutterBottom
+              sx={{
+                fontSize: "2rem",
+                fontWeigt: "bold",
+                paddingBottom: "0.5rem",
+              }}
+            >
               회원가입
             </Typography>
             <FormBox>
@@ -67,18 +76,32 @@ export default function Member() {
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { m: 1, width: '25ch' },
-                  display: 'flex',
-                  gap: '1rem',
-                  marginBottom: '2rem',
+                  "& .MuiTextField-root": { m: 1, width: "25ch" },
+                  display: "flex",
+                  gap: "1rem",
+                  marginBottom: "2rem",
                 }}
                 noValidate
                 autoComplete="off"
               >
-                <Button variant="contained" sx={{ backgroundColor: "#8ae28f", width: "8rem", height: "2.5rem" }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#8ae28f",
+                    width: "8rem",
+                    height: "2.5rem",
+                  }}
+                >
                   네이버(임시)
                 </Button>
-                <Button variant="contained" sx={{ backgroundColor: "#f5f590", width: "8rem", height: "2.5rem" }} >
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#f5f590",
+                    width: "8rem",
+                    height: "2.5rem",
+                  }}
+                >
                   카톡(임시)
                 </Button>
               </Box>
@@ -92,13 +115,23 @@ export default function Member() {
                 fullWidth
                 required
                 margin="normal"
-                sx={{ color: 'black' }}
+                sx={{ color: "black" }}
               />
-              <Button type="submit" sx={{
-                margin: "2rem", width: "12rem", height: "3rem", backgroundColor: "#776B5D", color: "white", '&:hover': {
-                  backgroundColor: '#403931',
-                },
-              }} variant="contained" onClick={toMemberConfirm}>
+              <Button
+                type="submit"
+                sx={{
+                  margin: "2rem",
+                  width: "12rem",
+                  height: "3rem",
+                  backgroundColor: "#776B5D",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#403931",
+                  },
+                }}
+                variant="contained"
+                onClick={toMemberConfirm}
+              >
                 가입하기
               </Button>
             </FormBox>
@@ -106,5 +139,5 @@ export default function Member() {
         </StyledCard>
       </CenteredContainer>
     </>
-  )
-};
+  );
+}

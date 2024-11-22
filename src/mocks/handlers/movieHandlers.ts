@@ -85,15 +85,11 @@ export const getMovieDetailHandler = http.get(
 );
 
 // POST 요청 핸들러
-//export const addMovieHandler = http.post("/movies", async ({ request }) => {});
+export const addMovieHandler = http.post("/movies", async ({ request }) => {});
 
 // 모든 영화 관련 핸들러들
-
 export const movieHandlers = [
   getMovieListHandler,
   getMovieDetailHandler,
   addMovieHandler,
 ];
-
-//export const movieHandlers = [getMovieHandler, addMovieHandler];
-

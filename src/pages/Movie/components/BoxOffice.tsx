@@ -1,26 +1,29 @@
-import { Box } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { getMovieList } from "../../../api/movieApi";
-import MovieCardSkeleton from "../../../components/MovieCard/MovieCardSkeleton";
-import MovieCard from "../../../components/MovieCard/MovieCard";
-import { ApiResponse } from "../../../typese/types";
-import { IMovieList } from "../../../typese/movieTypes";
+import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+import { getMovieList } from '../../../api/movieApi';
+import MovieCardSkeleton from '../../../components/MovieCard/MovieCardSkeleton';
+import MovieCard from '../../../components/MovieCard/MovieCard';
+import { ApiResponse } from '../../../typese/types';
+import { IMovieList } from '../../../typese/movieTypes';
+import useScreenSizeValue from '../../../hooks/useScreenSizeValue';
 
 function BoxOffice() {
+  const screenSize = useScreenSizeValue(2, 4, 6);
+
   const { isLoading: moviesLoading, data: moviesData } = useQuery<
     ApiResponse<IMovieList>
   >({
-    queryKey: ["movieList"],
-    queryFn: () => getMovieList("LATEST"),
+    queryKey: ['movieList'],
+    queryFn: () => getMovieList('LATEST'),
     gcTime: Infinity,
   });
 
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gap: "8px",
+        display: 'grid',
+        gridTemplateColumns: `repeat(${screenSize}, 1fr)`,
+        gap: '8px',
       }}
     >
       {moviesLoading
@@ -34,6 +37,7 @@ function BoxOffice() {
               id={movie.id}
               title={movie.title}
               posterImage={movie.posterImage}
+              popularity={movie.popularity}
             />
           ))}
     </Box>

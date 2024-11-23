@@ -9,6 +9,7 @@ import MovieComming from './pages/Movie/components/MovieComming';
 import MembershipIntro from './pages/Member/MembershipIntro';
 import App from './App';
 import MovieDetail from './pages/Movie/components/MovieDetail/MovieDetail';
+import MovieCategories from './pages/Movie/components/MovieCategories';
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
           {
             path: 'info',
             element: <MovieDetail />,
+          },
+          {
+            path: 'categories',
+            element: <MovieCategories />,
           },
         ],
       },

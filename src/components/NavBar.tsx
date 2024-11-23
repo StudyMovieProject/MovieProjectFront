@@ -96,10 +96,10 @@ function ResponsiveAppBar() {
                     centered
                   >
                     <Tabs
-                      component="a" // 추후 {Movie/BoxOffice}
+                      component="a"
                       label="영화"
                       value="1"
-                      onClick={() => navigate('/movie/box-office')}
+                      onClick={() => navigate('/movie/categories')}
                     />
                     <Tabs
                       component="a" // 추후 {heater/Movie?TheaterCode=1001}

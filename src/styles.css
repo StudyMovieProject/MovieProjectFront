@@ -1,0 +1,60 @@
+/* 캐러셀 애니메이션 효과 */
+@keyframes moveCenterToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes moveCenterRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.move-prev-right-to-center {
+  animation: moveCenterRight 0.5s ease-in-out reverse;
+}
+
+.move-prev-center-to-left {
+  animation: moveCenterToLeft 0.5s ease-in-out;
+}
+
+.move-next-left-to-center {
+  animation: moveCenterToLeft 0.5s ease-in-out reverse;
+}
+.move-next-center-to-right {
+  animation: moveCenterRight 0.5s ease-in-out;
+}
+
+/* 캐러셀 카드 뒤집기 애니메이션 효과 */
+@keyframes rotateOldLeft {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes rotateNewLeft {
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+.rotate-old {
+  animation: rotateOldLeft 0.25s linear forwards;
+}
+
+.rotate-new {
+  animation: rotateNewLeft 0.25s linear forwards;
+}

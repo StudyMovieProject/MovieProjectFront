@@ -5,8 +5,10 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-//import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
+import { useAuthStore } from "../../store/authSlice";
+import { useMutation } from '@tanstack/react-query';
+import axios from "axios";
 
 const CenteredContainer = styled(Box)`
   display: flex;
@@ -17,18 +19,10 @@ const CenteredContainer = styled(Box)`
   margin-top: 1rem;
 `;
 
-// const StepsBox = styled(Box)`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 30rem;
-//   margin-bottom: 20px;
-// `;
-
 const FormBox = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //width: 10rem;
   width: 100%;
 `;
 
@@ -40,14 +34,6 @@ const StyledCard = styled(Card)`
   background-color: #ffffff;
 `;
 
-// 입력 필드 스타일링
-// const StyledInput = styled.input`
-//   width: 100%;
-//   padding: 8px;
-//   margin: 8px 0;
-//   box-sizing: border-box;
-// `;
-
 const StyledLabel = styled.label`
   align-self: flex-start;
   margin-bottom: 1rem;
@@ -55,10 +41,24 @@ const StyledLabel = styled.label`
   font-size: 1rem;
 `;
 
-export default function MembershipIntro() {
+export default function MemberLogin() {
   const navigate = useNavigate();
-  const toMemberConfirm = () => {
-    navigate(`/member/confirm`);
+  const { login } = useAuthStore();
+
+  const { mutate: memberLogin } = useMutation<{ code: number; msg: string; data: string },
+    Error, typeof login>({
+      mutationFn: async (memberLogin) => {
+        const res = await axios.post("http://localhost:8080/api/members/login", memberLogin);
+        return res.data;
+      },
+      onSuccess: (data: any) => {
+        data.code === 1 ? navigate("/member/complete") : console.error("회원가입 실패:", data.msg);
+      }
+    });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    memberLogin(login);
   };
 
   return (
@@ -70,7 +70,7 @@ export default function MembershipIntro() {
               로그인
             </Typography>
             <FormBox>
-              <StyledLabel htmlFor="email">소셜 계정으로 가입</StyledLabel>
+              <StyledLabel htmlFor="email">소셜 계정으로 로그인</StyledLabel>
               <Box
                 component="form"
                 sx={{
@@ -89,12 +89,11 @@ export default function MembershipIntro() {
                   카톡(임시)
                 </Button>
               </Box>
-
-              <StyledLabel htmlFor="email">이메일 주소로 가입</StyledLabel>
+              <StyledLabel htmlFor="email">이메일 주소로 로그인</StyledLabel>
               <TextField
                 error
                 id="email"
-                label="Email"
+                label="이메일"
                 variant="standard"
                 fullWidth
                 required
@@ -104,7 +103,7 @@ export default function MembershipIntro() {
               <TextField
                 error
                 id="password"
-                label="Password"
+                label="비밀번호"
                 variant="standard"
                 fullWidth
                 required
@@ -115,13 +114,16 @@ export default function MembershipIntro() {
                 margin: "2rem", width: "12rem", height: "3rem", backgroundColor: "#776B5D", color: "white", '&:hover': {
                   backgroundColor: '#403931',
                 },
-              }} variant="contained" onClick={toMemberConfirm}>
-                가입하기
+              }} variant="contained" onClick={handleSubmit}>
+                로그인
               </Button>
             </FormBox>
           </CardContent>
         </StyledCard>
-      </CenteredContainer>
+      </CenteredContainer >
     </>
   )
 };
+
+// TODO
+// [ ] 로그인 실패시 모달 달기 

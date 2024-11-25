@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
-import Member from './pages/Member/Member';
-import MemberConfirm from './pages/Member/MemberConfirm';
+import Join from './pages/Member/Join';
+import Confirm from './pages/Member/Confirm';
+import Login from './pages/Member/Login';
+import Complete from './pages/Member/Complete';
 import Moive from './pages/Movie/Moive';
 import BoxOffice from './pages/Movie/components/BoxOffice';
 import MovieLatest from './pages/Movie/components/MovieLatest';
 import MovieComming from './pages/Movie/components/MovieComming'; // 스펠링 수정 부탁드립니다
-//import MembershipIntro from './pages/Member/MembershipIntro';
 import App from './App';
 import MovieDetail from './pages/Movie/components/MovieDetail/MovieDetail';
 
@@ -16,8 +17,10 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/member', element: <Member /> },
-      { path: '/member/confirm', element: <MemberConfirm /> },
+      { path: '/member', element: <Join /> },
+      { path: '/member/confirm', element: <Confirm /> },
+      { path: '/member/login', element: <Login /> },
+      { path: '/member/complete', element: <Complete /> },
       {
         path: 'movie',
         element: <Moive />, // 스펠링 수정 부탁드립니다 

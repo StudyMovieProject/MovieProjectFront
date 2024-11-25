@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 
-interface Member {
+export interface Member {
   memberId: string;
   username: string;
   password: string;
+  passwordConfirm: string;
   email: string;
   tel: string;
   zipcode: string;
@@ -17,12 +18,12 @@ interface Member {
     privacy: boolean;
     email: boolean;
     sms: boolean;
-    appNotifications: boolean;
+    appNoti: boolean;
   };
 }
 
 interface MemberState {
-  member: Member | null;
+  member: Member;
   setMember: (member: Member) => void;
   setAgreements: (agreements: Partial<Member['agreements']>) => void;
 }
@@ -32,6 +33,7 @@ export const useMemberStore = create<MemberState>((set) => ({
     memberId: "",
     username: "",
     password: "",
+    passwordConfirm: "",
     email: "",
     tel: "",
     zipcode: "",
@@ -45,19 +47,14 @@ export const useMemberStore = create<MemberState>((set) => ({
       privacy: false,
       email: false,
       sms: false,
-      appNotifications: false,
+      appNoti: false,
     },
   },
   setMember: (member) => set((state) => ({ member: { ...state.member, ...member } })),
-  setAgreements: (agreements) => set((state) => {
-    if (state.member) {
-      return {
-        member: {
-          ...state.member,
-          agreements: { ...state.member.agreements, ...agreements },
-        },
-      };
-    }
-    return state;
-  }),
+  setAgreements: (agreements) => set((state) => ({
+    member: {
+      ...state.member,
+      agreements: { ...state.member.agreements, ...agreements },
+    },
+  })),
 }));

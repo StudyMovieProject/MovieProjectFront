@@ -47,42 +47,9 @@ export default function MemberConfirm() {
   const navigate = useNavigate();
   const { member, setMember, setAgreements } = useMemberStore();
 
-  // const [formData, setFormData] = useState<Member>({
-  //   memberId: "",
-  //   username: "",
-  //   password: "",
-  //   email: "",
-  //   tel: "",
-  //   zipcode: "",
-  //   address: "",
-  //   detailAddress: "",
-  //   fullname: "",
-  //   role: "CUSTOMER",
-  //   status: "ACTIVE",
-  // });
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value, type, checked } = e.target;
-  //   if (type === "checkbox") {
-  //     setMember((prev) => ({
-  //       ...prev,
-  //       [name]: checked,
-  //     }));
-  //   } else {
-  //     setMember((prev) => ({
-  //       ...prev,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setAgreements({ [name]: checked });
-    } else {
-      setMember({ [name]: value });
-    }
+    type === "checkbox" ? setAgreements({ [name]: checked }) : setMember({ ...member, [name]: value });
   };
 
   const { mutate: memberJoin } = useMutation<{ code: number; msg: string; data: string }, Error, typeof member>({
@@ -108,25 +75,27 @@ export default function MemberConfirm() {
         </Typography>
         <FormBox noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Field>
+            <Field>
+              <TextField
+                label="이메일"
+                name="email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                required
+                value={member.email}
+                onChange={handleChange}
+              />
+            </Field>
             <TextField
               label="아이디"
+              name="memberId"
+              type="memberId"
               variant="outlined"
               fullWidth
               required
-              value={formData.memberId}
+              value={member.memberId}
               onChange={handleChange}
-            />
-          </Field>
-          <Field>
-            <TextField
-              label="이메일"
-              name="email"
-              type="email"
-              variant="outlined"
-              fullWidth
-              required
-              value={member.email}
-              onAbort={handleChange}
             />
           </Field>
           <Field>
@@ -145,19 +114,20 @@ export default function MemberConfirm() {
           <Field>
             <TextField
               label="비밀번호 확인"
-              name="password"
+              name="passwordConfirm"
               type="password"
               variant="outlined"
               fullWidth
               required
-              value={member.password}
+              value={member.passwordConfirm}
               onChange={handleChange}
             />
           </Field>
           <Field>
             <TextField
               label="이름"
-              name="name"
+              name="username"
+              type="username"
               variant="outlined"
               fullWidth
               required
@@ -201,7 +171,7 @@ export default function MemberConfirm() {
           <Field>
             <TextField
               label="우편번호"
-              name="zipCode"
+              name="zipcode"
               variant="outlined"
               fullWidth
               required
@@ -217,28 +187,47 @@ export default function MemberConfirm() {
               <FormControlLabel
                 control={<Checkbox />}
                 label="전체동의 (일괄 동의 체크박스)"
+                name="allAgree"
+                checked={
+                  member.agreements.terms &&
+                  member.agreements.privacy &&
+                  member.agreements.email &&
+                  member.agreements.sms &&
+                  member.agreements.appNoti
+                }
+                onChange={(e) => {
+                  const checked = (e.target as HTMLInputElement).checked;
+                  setAgreements({
+                    terms: checked,
+                    privacy: checked,
+                    email: checked,
+                    sms: checked,
+                    appNoti: checked,
+                  });
+                }}
               />
               <FormControlLabel
-                control={<Checkbox required />}
+                control={<Checkbox required name="terms" checked={member.agreements.terms} onChange={handleChange} />}
                 label="회원이용약관 동의 (필수)"
               />
               <FormControlLabel
-                control={<Checkbox required />}
+                control={<Checkbox required name="privacy" checked={member.agreements.privacy} onChange={handleChange} />}
                 label="개인정보처리방침 동의 (필수)"
               />
               <Typography variant="subtitle1">
                 이메일, SMS, 앱 알림 수신 동의 (선택)
               </Typography>
-              <FormControlLabel control={<Checkbox />} label="이메일" />
-              <FormControlLabel control={<Checkbox />} label="SMS" />
-              <FormControlLabel control={<Checkbox />} label="앱 알림" />
+              <FormControlLabel control={<Checkbox name="email" checked={member.agreements.email} onChange={handleChange} />} label="이메일" />
+              <FormControlLabel control={<Checkbox name="SMS" checked={member.agreements.sms} onChange={handleChange} />} label="SMS" />
+              <FormControlLabel control={<Checkbox name="appNoti" checked={member.agreements.appNoti} onChange={handleChange} />} label="앱 알림" />
             </FormGroup>
           </AgreementBox>
           <Button
             variant="contained"
             type="submit"
             fullWidth
-            //onClick={toSignupComplete}
+            //onClick={toSignupComplete} [ ] 조건식으로 넘어가게 
+            onClick={handleSubmit}
             sx={{
               marginTop: "2rem",
               height: "3rem",
@@ -254,12 +243,13 @@ export default function MemberConfirm() {
   );
 }
 
-
 // TODO
-// [ ] 전체 동의 버튼 누르면 일괄 동의 되도록 처리
-// [ ] validation
-// [ ] 폼 옆에 각각 폼 이름 작성
-// [x] outlet 해결
-// [ ] 다음 페이지에 role, status 데이터 표시
+// [ ] 주소 선택시 지도 api 요청
 // [ ] member 페이지에 작성한 이메일 저장해서 멤버컨펌에 가져오기
-// [ ] form field id, name 요소 추가
+// [ ] validation
+
+// [x] outlet 해결
+// [x] 전체 동의 버튼 누르면 일괄 동의 되도록 처리
+// [x] form field id, name 요소 추가 
+// [ ] 폰 번호 input 3칸으로 쪼개기
+// [ ] 폼 옆에 각각 폼 이름 작성

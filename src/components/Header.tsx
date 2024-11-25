@@ -9,10 +9,10 @@ export default function HeaderBar() {
   const navigate = useNavigate();
 
   const toMember = () => {
-    navigate(`/member`); // 회원가입
+    navigate(`/member`);
   };
   const toLogin = () => {
-    navigate(`/member/membershipIntro`); // 로그인
+    navigate(`/member/login`);
   };
 
   return (

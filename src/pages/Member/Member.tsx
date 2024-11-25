@@ -65,7 +65,7 @@ export default function Member() {
               gutterBottom
               sx={{
                 fontSize: "2rem",
-                fontWeigt: "bold",
+                fontWeight: "bold",
                 paddingBottom: "0.5rem",
               }}
             >
@@ -109,7 +109,7 @@ export default function Member() {
               <StyledLabel htmlFor="email">이메일 주소로 가입</StyledLabel>
               <TextField
                 error
-                id="emalil"
+                id="email"
                 label="Email"
                 variant="standard"
                 fullWidth

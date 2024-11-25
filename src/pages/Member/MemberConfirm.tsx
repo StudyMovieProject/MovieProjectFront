@@ -9,7 +9,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMemberStore } from "../../store/memberSlice";
 
 const ConfirmContainer = styled(Box)`
   display: flex;
@@ -43,100 +43,61 @@ const AgreementBox = styled(Box)`
   margin-top: 1rem;
 `;
 
-interface Member {
-  memberId: string;
-  username: string;
-  password: string;
-  email: string;
-  tel: string;
-  zipcode: string;
-  address: string;
-  detailAddress: string;
-  fullname: string;
-  role: string;
-  status: string;
-}
-
 export default function MemberConfirm() {
   const navigate = useNavigate();
+  const { member, setMember, setAgreements } = useMemberStore();
 
-  // const { data } = useQuery<Members, Error, string[]>({
-  //   queryKey: ['member'],
-  //   queryFn: async () => {
-  //     const res = await axios.post("http://localhost:8080/api/members");
-  //     const { users } = res.data;
-  //     return users
-  //   },
-  //   //staleTime: 1000 * 10,
-  //   select: data => data.map(user => user.memberId)
-  // })
+  // const [formData, setFormData] = useState<Member>({
+  //   memberId: "",
+  //   username: "",
+  //   password: "",
+  //   email: "",
+  //   tel: "",
+  //   zipcode: "",
+  //   address: "",
+  //   detailAddress: "",
+  //   fullname: "",
+  //   role: "CUSTOMER",
+  //   status: "ACTIVE",
+  // });
 
-  const [formData, setFormData] = useState<Member>({
-    memberId: "",
-    username: "",
-    password: "",
-    email: "",
-    tel: "",
-    zipcode: "",
-    address: "",
-    detailAddress: "",
-    fullname: "",
-    role: "CUSTOMER",
-    status: "ACTIVE",
-  });
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value, type, checked } = e.target;
+  //   if (type === "checkbox") {
+  //     setMember((prev) => ({
+  //       ...prev,
+  //       [name]: checked,
+  //     }));
+  //   } else {
+  //     setMember((prev) => ({
+  //       ...prev,
+  //       [name]: value,
+  //     }));
+  //   }
+  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
+      setAgreements({ [name]: checked });
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setMember({ [name]: value });
     }
   };
 
-  const { mutate: memberJoin, isError } = useMutation<
-    any,
-    Error,
-    Member,
-    unknown
-  >(
-    async (formData: Member): Promise<any> => {
-      const response = await axios.post(
-        "http://localhost:8080/api/members/join",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "*/*",
-          },
-        }
-      );
-      return response.data;
+  const { mutate: memberJoin } = useMutation<{ code: number; msg: string; data: string }, Error, typeof member>({
+    mutationFn: async (newMember) => {
+      const res = await axios.post("http://localhost:8080/api/members/join", newMember);
+      return res.data;
     },
-    {
-      onSuccess: (data: any) => {
-        if (data.code === 1) {
-          console.log("회원가입 성공:", data);
-          navigate("/member/complete");
-        } else {
-          console.error("회원가입 실패:", data.msg);
-        }
-      },
-      onError: (error: any) => {
-        console.error("회원가입 요청 중 오류 발생:", error);
-      },
+    onSuccess: (data: any) => {
+      data.code === 1 ? navigate("/member/complete") : console.error("회원가입 실패:", data.msg);
     }
-  );
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    memberJoin(formData);
+    memberJoin(member);
   };
 
   return (
@@ -164,7 +125,7 @@ export default function MemberConfirm() {
               variant="outlined"
               fullWidth
               required
-              value={formData.email}
+              value={member.email}
               onAbort={handleChange}
             />
           </Field>
@@ -177,7 +138,7 @@ export default function MemberConfirm() {
               helperText="영문, 숫자, 특수문자 2개 조합 8자 이상"
               fullWidth
               required
-              value={formData.password}
+              value={member.password}
               onChange={handleChange}
             />
           </Field>
@@ -189,7 +150,7 @@ export default function MemberConfirm() {
               variant="outlined"
               fullWidth
               required
-              value={formData.password}
+              value={member.password}
               onChange={handleChange}
             />
           </Field>
@@ -200,7 +161,7 @@ export default function MemberConfirm() {
               variant="outlined"
               fullWidth
               required
-              value={formData.username}
+              value={member.username}
               onChange={handleChange}
             />
           </Field>
@@ -211,29 +172,29 @@ export default function MemberConfirm() {
               variant="outlined"
               fullWidth
               required
-              value={formData.tel}
+              value={member.tel}
               onChange={handleChange}
             />
           </Field>
           <Field>
             <TextField
               label="주소"
-              name="adress"
+              name="address"
               variant="outlined"
               fullWidth
               required
-              value={formData.address}
+              value={member.address}
               onChange={handleChange}
             />
           </Field>
           <Field>
             <TextField
               label="상세주소"
-              name="detailAdress"
+              name="detailAddress"
               variant="outlined"
               fullWidth
               required
-              value={formData.detailAddress}
+              value={member.detailAddress}
               onChange={handleChange}
             />
           </Field>
@@ -244,7 +205,7 @@ export default function MemberConfirm() {
               variant="outlined"
               fullWidth
               required
-              value={formData.zipcode}
+              value={member.zipcode}
               onChange={handleChange}
             />
           </Field>
@@ -293,11 +254,12 @@ export default function MemberConfirm() {
   );
 }
 
+
 // TODO
 // [ ] 전체 동의 버튼 누르면 일괄 동의 되도록 처리
 // [ ] validation
 // [ ] 폼 옆에 각각 폼 이름 작성
 // [x] outlet 해결
 // [ ] 다음 페이지에 role, status 데이터 표시
-// [ ] member 페이지에 작성한 이메일 저장해서 memberconfirm에 가져오기
+// [ ] member 페이지에 작성한 이메일 저장해서 멤버컨펌에 가져오기
 // [ ] form field id, name 요소 추가

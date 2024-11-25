@@ -55,7 +55,7 @@ const StyledLabel = styled.label`
   font-size: 1rem;
 `;
 
-export default function Member() {
+export default function MembershipIntro() {
   const navigate = useNavigate();
   const toMemberConfirm = () => {
     navigate(`/member/confirm`);
@@ -66,7 +66,7 @@ export default function Member() {
       <CenteredContainer>
         <StyledCard>
           <CardContent>
-            <Typography variant="h4" component="div" gutterBottom sx={{ fontSize: '2rem', fontWeigt: 'bold', paddingBottom: '0.5rem' }}>
+            <Typography variant="h4" component="div" gutterBottom sx={{ fontSize: '2rem', fontWeight: 'bold', paddingBottom: '0.5rem' }}>
               로그인
             </Typography>
             <FormBox>
@@ -93,7 +93,7 @@ export default function Member() {
               <StyledLabel htmlFor="email">이메일 주소로 가입</StyledLabel>
               <TextField
                 error
-                id="emalil"
+                id="email"
                 label="Email"
                 variant="standard"
                 fullWidth
@@ -103,7 +103,7 @@ export default function Member() {
               />
               <TextField
                 error
-                id="assword"
+                id="password"
                 label="Password"
                 variant="standard"
                 fullWidth

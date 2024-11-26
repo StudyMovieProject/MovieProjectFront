@@ -4,6 +4,8 @@ import Join from './pages/Member/Join';
 import Confirm from './pages/Member/Confirm';
 import Login from './pages/Member/Login';
 import Complete from './pages/Member/Complete';
+import Mypage from './pages/Member/Mypage';
+import Info from "./pages/Member/Info";
 import Moive from './pages/Movie/Moive';
 import BoxOffice from './pages/Movie/components/BoxOffice';
 import MovieLatest from './pages/Movie/components/MovieLatest';
@@ -21,6 +23,8 @@ export const router = createBrowserRouter([
       { path: '/member/confirm', element: <Confirm /> },
       { path: '/member/login', element: <Login /> },
       { path: '/member/complete', element: <Complete /> },
+      { path: '/member/mypage', element: <Mypage /> },
+      { path: '/member/info', element: <Info /> },
       {
         path: 'movie',
         element: <Moive />, // 스펠링 수정 부탁드립니다 

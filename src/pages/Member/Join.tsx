@@ -6,7 +6,8 @@ import styled from "@emotion/styled";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Outlet } from "react-router-dom";
-import Typography from "@mui/material/Typography";
+import { useMemberStore } from "../../store/memberSlice";
+import { Typo } from "./Confirm";
 
 const CenteredContainer = styled(Box)`
   display: flex;
@@ -53,24 +54,22 @@ export default function Member() {
     navigate(`/member/confirm`);
   };
 
+  const { member, setMember } = useMemberStore();
+
+  const mailToConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setMember({ ...member, [name]: value });
+  };
+
   return (
     <>
       <Outlet />
       <CenteredContainer>
         <StyledCard>
           <CardContent>
-            <Typography
-              variant="h4"
-              component="div"
-              gutterBottom
-              sx={{
-                fontSize: "2rem",
-                fontWeight: "bold",
-                paddingBottom: "0.5rem",
-              }}
-            >
+            <Typo>
               회원가입
-            </Typography>
+            </Typo>
             <FormBox>
               <StyledLabel htmlFor="email">소셜 계정으로 가입</StyledLabel>
               <Box
@@ -110,12 +109,15 @@ export default function Member() {
               <TextField
                 error
                 id="email"
+                name="email"
                 label="Email"
                 variant="standard"
                 fullWidth
                 required
                 margin="normal"
                 sx={{ color: "black" }}
+                value={member.email}
+                onChange={mailToConfirm}
               />
               <Button
                 type="submit"
@@ -141,3 +143,6 @@ export default function Member() {
     </>
   );
 }
+
+//TODO
+// [ ] 이미 가입된 아이디일 경우 비밀번호 찾기 페이지로 이동

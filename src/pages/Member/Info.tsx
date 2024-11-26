@@ -10,6 +10,7 @@ import Typography, { TypographyProps } from "@mui/material/Typography";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Member, useMemberStore } from "../../store/memberSlice";
+import { useState } from "react";
 
 export const Typo = styled((props: TypographyProps) => <Typography component="h4" {...props} />)`
   font-size: 1.3rem;
@@ -54,35 +55,66 @@ const AgreementBox = styled(Box)`
   margin-top: 1rem;
 `;
 
-export default function MemberConfirm() {
+export default function Info() {
   const navigate = useNavigate();
   const { member, setMember, setAgreements } = useMemberStore();
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target; ``
     type === "checkbox" ? setAgreements({ [name]: checked }) : setMember({ ...member, [name]: value });
   };
 
-  const { mutate: memberJoin } = useMutation<{ code: number; msg: string; data: string }, Error, Member>({
-    mutationFn: async (newMember) => {
-      const res = await axios.post("http://localhost:8080/api/members/join", newMember);
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    switch (name) {
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) error = '유효한 이메일을 입력해주세요.';
+        break;
+      case 'password':
+        if (value.length < 8) error = '비밀번호는 최소 8자 이상이어야 합니다.';
+        break;
+      case 'passwordConfirm':
+        if (value !== member.password) error = '비밀번호가 일치하지 않습니다.';
+        break;
+      default:
+        break;
+    }
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+   // 수정 중
+  const validateForm = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(member.email)) newErrors.email = '유효한 이메일을 입력해주세요.';
+    if (member.password.length < 8) newErrors.password = '비밀번호는 최소 8자 이상이어야 합니다.';
+    if (member.passwordConfirm !== member.password) newErrors.passwordConfirm = '비밀번호가 일치하지 않습니다.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const { mutate: memberInfo } = useMutation<{ code: number; msg: string; data: string }, Error, Member>({
+    mutationFn: async (editMember) => {
+      const res = await axios.put("http://localhost:8080/api/me/update", editMember);
       return res.data;
     },
     onSuccess: (data) => {
-      data.code === 1 ? navigate("/member/complete") : console.error("회원가입 실패:", data.msg);
+      data.code === 1 ? navigate("/member/mypage") : console.error("회원 정보 수정 실패", data.msg);
     }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    memberJoin(member);
+    memberInfo(member);
   };
 
   return (
     <>
       <ConfirmContainer>
         <Typo>
-          회원가입
+          회원정보 관리
         </Typo>
         <FormBox noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Field>
@@ -96,6 +128,8 @@ export default function MemberConfirm() {
                 required
                 value={member.email}
                 onChange={handleChange}
+                error={!!errors.email}
+                helperText={errors.email}
               />
             </Field>
             <TextField
@@ -197,40 +231,6 @@ export default function MemberConfirm() {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
-                label="전체 동의합니다"
-                name="allAgree"
-                checked={
-                  member.agreements.terms &&
-                  member.agreements.privacy &&
-                  member.agreements.allReceive &&
-                  member.agreements.email &&
-                  member.agreements.sms &&
-                  member.agreements.appNoti
-                }
-                onChange={(e) => {
-                  const checked = (e.target as HTMLInputElement).checked;
-                  setAgreements({
-                    terms: checked,
-                    privacy: checked,
-                    email: checked,
-                    allReceive: checked,
-                    sms: checked,
-                    appNoti: checked,
-                  });
-                }}
-              />
-              <FormControlLabel
-                control={<Checkbox required name="terms" checked={member.agreements.terms} onChange={handleChange} />}
-                label="회원 이용약관 동의"
-                required
-              />
-              <FormControlLabel
-                control={<Checkbox required name="privacy" checked={member.agreements.privacy} onChange={handleChange} />}
-                label="개인정보 처리 방침 동의"
-                required
-              />
-              <FormControlLabel
-                control={<Checkbox />}
                 label="이메일, SMS, 앱 알림 수신 동의 (선택)"
                 name="allReceive"
                 checked={
@@ -268,7 +268,7 @@ export default function MemberConfirm() {
               backgroundColor: "#776B5D",
             }}
           >
-            가입하기
+            수정하기
           </Button>
         </FormBox>
       </ConfirmContainer>
@@ -279,14 +279,14 @@ export default function MemberConfirm() {
 // TODO
 // [ ] 비밀번호, 아이디 validation
 // [ ] 주소 선택시 지도 api 요청
-// [ ] 상단 Typography 컴포넌트로 만들기
+
 
 // [x] member 페이지에 작성한 이메일 저장해서 멤버컨펌에 가져오기
 // [x] outlet 해결
 // [x] 전체 동의 버튼 누르면 일괄 동의 되도록 처리
 // [x] form field id, name 요소 추가 
 // [x] 체크 박스 일괄 선택
+// [x] 상단 Typography 컴포넌트로 만들기
 // [ ] 폰 번호 input 3칸으로 쪼개기
 // [ ] 폼 옆에 각각 폼 이름 작성
 // [ ] 약관 lorem 텍스트 추가
-// [ ] 컬러 변경

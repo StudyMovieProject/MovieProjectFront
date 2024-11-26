@@ -5,12 +5,12 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import { useAuthStore } from "../../store/authSlice";
 import { useMutation } from '@tanstack/react-query';
 import axios from "axios";
+import { Typo } from "./Confirm";
 
-const CenteredContainer = styled(Box)`
+export const CenteredContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ const FormBox = styled(Box)`
   width: 100%;
 `;
 
-const StyledCard = styled(Card)`
+export const StyledCard = styled(Card)`
   min-width: 20rem;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -66,9 +66,9 @@ export default function MemberLogin() {
       <CenteredContainer>
         <StyledCard>
           <CardContent>
-            <Typography variant="h4" component="div" gutterBottom sx={{ fontSize: '2rem', fontWeight: 'bold', paddingBottom: '0.5rem' }}>
+            <Typo>
               로그인
-            </Typography>
+            </Typo>
             <FormBox>
               <StyledLabel htmlFor="email">소셜 계정으로 로그인</StyledLabel>
               <Box

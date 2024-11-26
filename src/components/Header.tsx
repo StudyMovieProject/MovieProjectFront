@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { useAuthStore } from "../store/authSlice"
 
 export default function HeaderBar() {
+  const { isLoggedIn, logout } = useAuthStore();
   const navigate = useNavigate();
 
   const toMember = () => {
@@ -15,12 +17,30 @@ export default function HeaderBar() {
     navigate(`/member/login`);
   };
 
+  const toMypage = () => {
+    navigate(`/member/mypage`);
+  }
+
+  const Logout = () => {
+    logout();
+    navigate(`/`);
+  }
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavAppBar position="static">
-        <HeaderBtn onClick={toLogin}>로그인</HeaderBtn>
-        <HeaderBtn onClick={toMember}>회원가입</HeaderBtn>
-        <HeaderBtn onClick={toLogin}>비회원</HeaderBtn>
+        {!isLoggedIn ? (
+          <>
+            <HeaderBtn onClick={toLogin}>로그인</HeaderBtn>
+            <HeaderBtn onClick={toMember}>회원가입</HeaderBtn>
+          </>
+        ) : (
+          <>
+            <HeaderBtn onClick={Logout}>로그아웃</HeaderBtn>
+            <HeaderBtn onClick={toMypage}>마이페이지</HeaderBtn>
+          </>
+        )}
       </NavAppBar>
     </Box>
   );

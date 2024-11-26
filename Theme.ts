@@ -88,5 +88,45 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "#776B5D", // 기본 테두리 색상
+            },
+            "&:hover fieldset": {
+              borderColor: "#38332d", // 호버 시 테두리 색상
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#B0A695",
+            },
+            '&.Mui-error fieldset': {
+              borderColor: '#ad314a', // 오류 시 테두리 색상
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "#6f6f6e",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "#776B5D", // 포커스 시 라벨 색상
+          },
+        },
+      },
+    },
+    // Checkbox 스타일 오버라이드
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: "#776B5D", // 기본 체크박스 색상
+          "&.Mui-checked": {
+            color: "#B0A695", // 체크 시 색상
+          },
+          "&.Mui-focusVisible": {
+            color: "#B0A695", // 포커스 시 색상
+          },
+        },
+      },
+    },
   },
 });

@@ -16,6 +16,7 @@ export interface Member {
   agreements: {
     terms: boolean;
     privacy: boolean;
+    allReceive: boolean;
     email: boolean;
     sms: boolean;
     appNoti: boolean;
@@ -40,11 +41,12 @@ export const useMemberStore = create<MemberState>((set) => ({
     address: "",
     detailAddress: "",
     fullname: "",
-    role: "CUSTOMER",
-    status: "ACTIVE",
+    role: "",
+    status: "",
     agreements: {
       terms: false,
       privacy: false,
+      allReceive: false,
       email: false,
       sms: false,
       appNoti: false,

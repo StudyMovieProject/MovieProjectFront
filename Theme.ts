@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
-import { css } from "@emotion/react";
-import emotionNormalize from "emotion-normalize";
+import { createTheme } from '@mui/material/styles';
+import { css } from '@emotion/react';
+import emotionNormalize from 'emotion-normalize';
 
 export const globalStyles = css`
   ${emotionNormalize}
@@ -8,12 +8,23 @@ export const globalStyles = css`
   html, body {
     margin: 0;
     padding: 0;
-    font-family: "Pretendard Variable", Pretendard, -apple-system,
-      BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-      "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system,
+      BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+      'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
     background-color: white;
     min-height: 100%;
+
+    /* 반응형 폰트 크기 설정 */
+    font-size: 16px; /* 기본 크기 (데스크탑) */
+
+    @media (max-width: 1200px) {
+      font-size: 14px; /* 태블릿 크기 */
+    }
+
+    @media (max-width: 600px) {
+      font-size: 12px; /* 모바일 크기 */
+    }
   }
 
   *,
@@ -22,9 +33,10 @@ export const globalStyles = css`
     box-sizing: border-box;
   }
 `;
+
 export const theme = createTheme({
   palette: {
-    mode: "light",
+    mode: 'light',
     // primary: {
     //   main: #efefef,
     // },
@@ -39,10 +51,10 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: "black",
+          color: 'black',
           lineHeight: 0,
-          "&.Mui-selected": {
-            color: "black",
+          '&.Mui-selected': {
+            color: 'black',
           },
         },
       },
@@ -51,7 +63,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           // backgroundColor: '#F3EEEA',
-          boxShadow: "none",
+          boxShadow: 'none',
         },
       },
       defaultProps: {
@@ -61,9 +73,9 @@ export const theme = createTheme({
     MuiToolbar: {
       styleOverrides: {
         root: {
-          minHeight: "1.8rem",
-          "@media (min-width:600px)": {
-            minHeight: "2rem",
+          minHeight: '1.8rem',
+          '@media (min-width:600px)': {
+            minHeight: '2rem',
           },
         },
       },
@@ -71,12 +83,12 @@ export const theme = createTheme({
     MuiTab: {
       styleOverrides: {
         root: {
-          color: "black",
-          "&.Mui-selected": {
-            color: "#776B5D",
+          color: 'black',
+          '&.Mui-selected': {
+            color: '#776B5D',
           },
           indicator: {
-            backgroundColor: "#776B5D",
+            backgroundColor: '#776B5D',
           },
         },
       },
@@ -84,7 +96,7 @@ export const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: "#776B5D",
+          backgroundColor: '#776B5D',
         },
       },
     },

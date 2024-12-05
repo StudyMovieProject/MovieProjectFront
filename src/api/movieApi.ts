@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 const BASE_PATH =
-  window.location.hostname === "localhost"
-    ? "http://localhost:8080"
-    : "http://localhost:8080";
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:8080'
+    : 'http://localhost:8080';
 
-type IGetMovieList = "POPULAR" | "LATEST" | "UPCOMING";
+export type IGetMovieList = 'POPULAR' | 'LATEST' | 'UPCOMING';
 
 export async function getMovieList(status: IGetMovieList) {
   const response = await axios.get(`${BASE_PATH}/api/movies/status/${status}`);

@@ -12,6 +12,7 @@ import MovieLatest from './pages/Movie/components/MovieLatest';
 import MovieComming from './pages/Movie/components/MovieComming'; // 스펠링 수정 부탁드립니다
 import App from './App';
 import MovieDetail from './pages/Movie/components/MovieDetail/MovieDetail';
+import MovieCategories from './pages/Movie/components/MovieCategories';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
           {
             path: 'info',
             element: <MovieDetail />,
+          },
+          {
+            path: 'categories',
+            element: <MovieCategories />,
           },
         ],
       },

@@ -1,18 +1,21 @@
-import { Box } from "@mui/material";
-import MovieCardSkeleton from "../../../components/MovieCard/MovieCardSkeleton";
-import MovieCard from "../../../components/MovieCard/MovieCard";
-import { useEffect } from "react";
-import { useMovieSortStore } from "../../../store/movieStore";
-import { getMovieList } from "../../../api/movieApi";
-import { useQuery } from "@tanstack/react-query";
-import { ApiResponse } from "../../../typese/types";
-import { IMovieList } from "../../../typese/movieTypes";
+import { Box } from '@mui/material';
+import MovieCardSkeleton from '../../../components/MovieCard/MovieCardSkeleton';
+import MovieCard from '../../../components/MovieCard/MovieCard';
+import { useEffect } from 'react';
+import { useMovieSortStore } from '../../../store/movieStore';
+import { getMovieList } from '../../../api/movieApi';
+import { useQuery } from '@tanstack/react-query';
+import { ApiResponse } from '../../../typese/types';
+import { IMovieList } from '../../../typese/movieTypes';
+import useScreenSizeValue from '../../../hooks/useScreenSizeValue';
 
 function MovieComming() {
+  const screenSize = useScreenSizeValue(2, 4, 6);
+
   const { isLoading: moviesUpComingLoading, data: moviesUpComingData } =
     useQuery<ApiResponse<IMovieList>>({
-      queryKey: ["movieList"],
-      queryFn: () => getMovieList("UPCOMING"),
+      queryKey: ['movieList'],
+      queryFn: () => getMovieList('UPCOMING'),
     });
 
   const { sort, toggleSortByRelease } = useMovieSortStore();
@@ -21,7 +24,7 @@ function MovieComming() {
     ? moviesUpComingData?.data.slice().sort((a, b) => {
         if (sort) {
           // 가나다순 정렬
-          return a.title.localeCompare(b.title, "ko");
+          return a.title.localeCompare(b.title, 'ko');
         } else {
           // 개봉일순 정렬 (productDate 내림차순)
           return (
@@ -40,9 +43,9 @@ function MovieComming() {
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gap: "8px",
+        display: 'grid',
+        gridTemplateColumns: `repeat(${screenSize}, 1fr)`,
+        gap: '8px',
       }}
     >
       {moviesUpComingLoading
@@ -55,6 +58,7 @@ function MovieComming() {
               id={movie.id}
               title={movie.title}
               posterImage={movie.posterImage}
+              popularity={movie.popularity}
             />
           ))}
     </Box>
